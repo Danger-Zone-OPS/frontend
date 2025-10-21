@@ -1,5 +1,5 @@
 import "leaflet/dist/leaflet.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   MapContainer,
   Polygon,
@@ -30,7 +30,7 @@ const severityColors: Record<SeverityLevel, string> = {
 
 export function Map(props: MapProps) {
   const geolocation = useGeolocation();
-  const center: Coordinate = [55.6761, 12.5683];
+  const defaultCenter: Coordinate = [55.6761, 12.5683];
 
   const [newAreaPoints, setNewAreaPoints] = useState<Coordinate[]>([]);
 
@@ -52,21 +52,23 @@ export function Map(props: MapProps) {
     setNewAreaPoints([]);
   };
 
-  const handleEscapePressed = () => setNewAreaPoints([]);
+  const handleEscapePressed = () => {
+    setNewAreaPoints([]);
+  };
 
   useHotkeys("enter", handleEnterPressed);
-  useHotkeys("escape", handleEscapePressed);
+  useHotkeys("esc", handleEscapePressed);
 
   return (
     <MapContainer
-      center={geolocation.location ?? center}
+      center={geolocation.location ?? defaultCenter}
       zoom={geolocation.location ? 13 : 2}
       style={{ height: "100vh", width: "100%" }}
     >
       <MapClickHandler onClick={handleMapClick} />
 
       {geolocation.location && (
-        <FlyToUserLocation location={geolocation.location} />
+        <FlyToUserLocationOnce location={geolocation.location} />
       )}
 
       <TileLayer
@@ -106,18 +108,16 @@ export function Map(props: MapProps) {
             {!props.readonly && (
               <>
                 <button
-                  onClick={() => {
-                    if (props.onEditRiskArea && !props.readonly)
-                      props.onEditRiskArea(area.id);
-                  }}
+                  onClick={() =>
+                    props.onEditRiskArea && props.onEditRiskArea(area.id)
+                  }
                 >
                   Edit
                 </button>
                 <button
-                  onClick={() => {
-                    if (props.onDeleteRiskArea && !props.readonly)
-                      props.onDeleteRiskArea(area.id);
-                  }}
+                  onClick={() =>
+                    props.onDeleteRiskArea && props.onDeleteRiskArea(area.id)
+                  }
                 >
                   Delete
                 </button>
@@ -130,11 +130,15 @@ export function Map(props: MapProps) {
   );
 }
 
-function FlyToUserLocation({ location }: { location: Coordinate }) {
+function FlyToUserLocationOnce({ location }: { location: Coordinate }) {
   const map = useMap();
+  const hasCenteredRef = useRef(false);
 
   useEffect(() => {
-    map.flyTo(location, 13);
+    if (!hasCenteredRef.current) {
+      map.flyTo(location, 13);
+      hasCenteredRef.current = true;
+    }
   }, [location, map]);
 
   return null;
