@@ -15,10 +15,8 @@ export function ModeSelector() {
             <span>Commander View</span>
           </h3>
           <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni
-            accusantium commodi ab suscipit, labore repellat iste natus
-            necessitatibus dolor maiores et, nesciunt dolore at, nobis deserunt
-            consequuntur est laboriosam perferendis?
+            Create, edit and remove risk areas. This will then be displayed to
+            the infantry.
           </p>
         </Link>
         <Link className={styles.pageLink} to={ROUTES.Infantry}>
@@ -27,10 +25,8 @@ export function ModeSelector() {
             <span>Infantry View</span>
           </h3>
           <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni
-            accusantium commodi ab suscipit, labore repellat iste natus
-            necessitatibus dolor maiores et, nesciunt dolore at, nobis deserunt
-            consequuntur est laboriosam perferendis?
+            Map that helps the infantry by warning and potentially avoiding risk
+            areas while out in the field.
           </p>
         </Link>
       </div>

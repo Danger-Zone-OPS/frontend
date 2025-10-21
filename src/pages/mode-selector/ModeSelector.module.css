@@ -6,7 +6,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 10px;
+    gap: 30px;
     background-image: url(../../assets/swe_army_pattern.png);
     background-size: cover;
     background-position: center;
@@ -30,7 +30,7 @@
 }
 
 .title {
-    font-size: 48px;
+    font-size: 80px;
 }
 
 .pageLinkContainer {
@@ -44,7 +44,7 @@
     flex-direction: column;
     padding: 25px;
     border-radius: 25px;
-    width: 350px;
+    width: 450px;
     text-decoration: unset;
     color: inherit;
     transition: background 0.1s ease;
@@ -61,7 +61,7 @@
     gap: 5px;
     padding: unset;
     margin: unset;
-    font-size: inherit;
+    font-size: 25px;
 }
 
 .pageLink p {
