@@ -1,72 +1,45 @@
 import { useState } from "react";
 import { Map } from "../../components/Map";
-import type { Coordinate, RiskArea } from "../../types";
+import type { Coordinate } from "../../types";
+import { useRiskAreaStore } from "../../hooks/useRiskAreaStore";
 import styles from "./CommanderView.module.css";
 import { Modal } from "../../components/modal/Modal";
 
-const mockRiskAreas: RiskArea[] = [
-  {
-    id: "1",
-    title: "Danger Zone 1",
-    description: "Area: High Risk",
-    severity: "high",
-    coordinates: [
-      [55.68, 12.56],
-      [55.69, 12.57],
-      [55.685, 12.58],
-      [55.675, 12.575],
-    ],
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  },
-  {
-    id: "2",
-    title: "Danger Zone 2",
-    description: "Area: Medium Risk",
-    severity: "medium",
-    coordinates: [
-      [55.67, 12.55],
-      [55.675, 12.555],
-      [55.67, 12.56],
-      [55.665, 12.555],
-    ],
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  },
-];
-
 export function CommanderView() {
+  const riskAreas = useRiskAreaStore((state) => state.riskAreas);
+
   const handlePolygonCreated = (coordinates: Coordinate[]) => {
     setNewPolygonCoords(coordinates);
     setIsModalOpen(true);
-};
+  };
 
   const handleEditRiskArea = (id: string) => {
-    // Maybe open a similar modal with the data where user can edit
+    // TODO: Open modal with existing data for editing
+    // Then make PUT request to /api/risk-areas/:id
+    console.log("Edit risk area:", id);
   };
 
   const handleDeleteRiskArea = (id: string) => {
-    // Confirm modal? Then deletion logic
+    // TODO: Show confirmation modal
+    // Then make DELETE request to /api/risk-areas/:id
+    console.log("Delete risk area:", id);
   };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [newPolygonCoords, setNewPolygonCoords] = useState<Coordinate[] | null>(null);
-  
-  
+  const [newPolygonCoords, setNewPolygonCoords] = useState<Coordinate[] | null>(
+    null
+  );
 
   return (
     <div className={styles.container}>
       <header className={styles.header}>
         <h1 className={styles.title}>Commander View</h1>
       </header>
-      <Modal 
-        isOpen = {isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
-      
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
       <div className={styles.mapWrapper}>
         <Map
-          riskAreas={mockRiskAreas}
+          riskAreas={riskAreas}
           onPolygonCreated={handlePolygonCreated}
           onEditRiskArea={handleEditRiskArea}
           onDeleteRiskArea={handleDeleteRiskArea}
@@ -75,4 +48,3 @@ export function CommanderView() {
     </div>
   );
 }
-
