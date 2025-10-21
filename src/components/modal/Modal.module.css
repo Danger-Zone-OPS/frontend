@@ -1,7 +1,3 @@
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
 .overlay {
   position: fixed;
   top: 0;
@@ -13,7 +9,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem; 
+  padding: 1rem;
 }
 
 .modal {
@@ -38,7 +34,7 @@
   margin: 0;
   color: #fff;
   font-size: 1.5rem;
-  word-break: break-word; 
+  word-break: break-word;
 }
 
 .closeButton {
@@ -86,7 +82,8 @@
   color: #fff;
   font-size: 1rem;
   font-family: inherit;
-  max-width: 100%; /* prevent overflow */
+  max-width: 100%;
+  /* prevent overflow */
 }
 
 .field input:focus,
@@ -111,14 +108,16 @@
   color: #999;
   margin-bottom: 1.5rem;
   font-size: 0.9rem;
-  word-break: break-word; /* avoid horizontal overflow on long text */
+  word-break: break-word;
+  /* avoid horizontal overflow on long text */
 }
 
 .actions {
   display: flex;
   gap: 1rem;
   justify-content: flex-end;
-  flex-wrap: wrap; /* in case space is tight */
+  flex-wrap: wrap;
+  /* in case space is tight */
 }
 
 .cancelButton,
