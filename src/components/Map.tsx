@@ -14,6 +14,7 @@ import type { LeafletMouseEvent } from "leaflet";
 // import { RecenterButton } from "./RecenterButton";
 import { PositionMarker } from "./PositionMarker";
 import { useGeolocation } from "@uidotdev/usehooks";
+import { useNavigate } from "react-router";
 
 interface MapProps {
   riskAreas: RiskArea[];
@@ -34,6 +35,8 @@ const severityColors: Record<SeverityLevel, string> = {
 export function Map(props: MapProps) {
   const geolocation = useGeolocation();
   const defaultCenter: Coordinate = [55.6761, 12.5683];
+
+  const navigate = useNavigate();
 
   const [newAreaPoints, setNewAreaPoints] = useState<Coordinate[]>([]);
 
@@ -125,7 +128,10 @@ export function Map(props: MapProps) {
             <br />
             {area.description}
             <br />
-            <button>Read more</button>
+            <button onClick={() => navigate(`/readmore/${area.id}`)}>
+              Read more
+            </button>
+
             {!props.readonly && (
               <>
                 <button

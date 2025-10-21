@@ -3,11 +3,13 @@ import { App } from "./App";
 import { ModeSelector } from "./pages/mode-selector/ModeSelector";
 import { CommanderView } from "./pages/commander-view/CommanderView";
 import { InfantryView } from "./pages/infantry-view/InfantryView";
+import { ReadMoreView } from "./pages/readmore-view/ReadMoreView";
 
 export const ROUTES = {
   Index: "/",
   Commander: "/commander",
   Infantry: "/infantry",
+  ReadMore: "/readmore/:id",
 } as const;
 
 export type Routes = (typeof ROUTES)[keyof typeof ROUTES];
@@ -28,6 +30,10 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.Infantry,
         element: <InfantryView />,
+      },
+      {
+        path: ROUTES.ReadMore,
+        element: <ReadMoreView />,
       },
     ],
   },
