@@ -1,4 +1,5 @@
 .modeSelector {
+    position: relative; 
     width: 100%;
     height: 100vh;
     display: flex;
@@ -6,6 +7,26 @@
     align-items: center;
     flex-direction: column;
     gap: 10px;
+    background-image: url(../../assets/swe_army_pattern.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.modeSelector::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); 
+    z-index: 0;
+}
+
+
+.modeSelector > * {
+    position: relative;
+    z-index: 1;
 }
 
 .title {
