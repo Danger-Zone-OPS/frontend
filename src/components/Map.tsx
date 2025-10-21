@@ -1,7 +1,9 @@
-import { MapContainer, TileLayer, Polygon, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Polygon, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import type { LatLngExpression } from "leaflet";
 import type { RiskArea, SeverityLevel } from "../types";
+import { useEffect } from "react";
+import { useGeolocation } from "../hooks/useGeolocation";
 
 interface MapProps {
   riskAreas: RiskArea[];
@@ -16,18 +18,22 @@ const severityColors: Record<SeverityLevel, string> = {
 };
 
 export function Map({ riskAreas, readonly }: MapProps) {
-  const center: LatLngExpression = [55.6761, 12.5683];
+  const { location, error } = useGeolocation();
+
+  const defaultCenter: LatLngExpression = [55.6761, 12.5683];
 
   return (
     <MapContainer
-      center={center}
-      zoom={13}
+      center={location ?? defaultCenter}
+      zoom={location ? 13 : 2}
       style={{ height: "100vh", width: "100%" }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+
+      {location && <FlyToUserLocation location={location} />}
 
       {riskAreas.map((area) => {
         const positions: LatLngExpression[] = area.coordinates.map(
@@ -56,3 +62,14 @@ export function Map({ riskAreas, readonly }: MapProps) {
     </MapContainer>
   );
 }
+
+function FlyToUserLocation({ location }: { location: LatLngExpression }) {
+  const map = useMap();
+
+  useEffect(() => {
+    map.flyTo(location, 13); // or map.setView(location, 13)
+  }, [location, map]);
+
+  return null;
+}
+
