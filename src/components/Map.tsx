@@ -12,6 +12,7 @@ import { useGeolocation } from "../hooks/useGeolocation";
 import type { RiskArea, Coordinate, SeverityLevel } from "../types";
 import { useHotkeys } from "react-hotkeys-hook";
 import type { LeafletMouseEvent } from "leaflet";
+import { RecenterButton } from "./RecenterButton";
 
 interface MapProps {
   riskAreas: RiskArea[];
@@ -64,7 +65,9 @@ export function Map(props: MapProps) {
       center={geolocation.location ?? defaultCenter}
       zoom={geolocation.location ? 13 : 2}
       style={{ height: "100vh", width: "100%" }}
+      zoomControl={false}
     >
+      <RecenterButton location={geolocation.location}></RecenterButton>
       <MapClickHandler onClick={handleMapClick} />
 
       {geolocation.location && (
