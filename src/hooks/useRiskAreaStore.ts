@@ -22,7 +22,6 @@ export const useRiskAreaStore = create<RiskAreaStore>((set, get) => ({
 
   addRiskArea: (riskArea) =>
     set((state) => {
-      // Prevent duplicates - only add if ID doesn't already exist
       const exists = state.riskAreas.some((area) => area.id === riskArea.id);
       if (exists) {
         return state;

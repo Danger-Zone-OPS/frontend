@@ -1,0 +1,91 @@
+.headerExpanded {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    background-color: #222;
+    border: 1px solid rgb(59, 59, 59);
+    border-radius: 8px;
+    padding: 25px;
+    z-index: 1000;
+}
+
+.headerContent {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.headerLeft,
+.headerCenter,
+.headerRight {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.headerLeft {
+    justify-content: flex-start;
+}
+
+.headerCenter {
+    justify-content: center;
+}
+
+.headerRight {
+    justify-content: flex-end;
+}
+
+.headerContent h3 {
+    margin: 0;
+}
+
+.coordinates {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: monospace;
+    font-size: 14px;
+    color: #aaa;
+}
+
+.toggleButton {
+    background: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 8px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.toggleButton:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.headerMinimized {
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    background-color: #222;
+    border: 1px solid rgb(59, 59, 59);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+    z-index: 1000;
+    transition: background-color 0.2s;
+    padding: 0;
+}
+
+.headerMinimized:hover {
+    background-color: #333;
+}

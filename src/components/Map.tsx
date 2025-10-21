@@ -8,15 +8,17 @@ import {
   useMap,
   useMapEvents,
 } from "react-leaflet";
-import { useGeolocation } from "../hooks/useGeolocation";
 import type { RiskArea, Coordinate, SeverityLevel } from "../types";
 import { useHotkeys } from "react-hotkeys-hook";
 import type { LeafletMouseEvent } from "leaflet";
-import { RecenterButton } from "./RecenterButton";
+// import { RecenterButton } from "./RecenterButton";
+import { PositionMarker } from "./PositionMarker";
+import { useGeolocation } from "@uidotdev/usehooks";
 
 interface MapProps {
   riskAreas: RiskArea[];
   readonly?: boolean;
+  showLocationMarker?: boolean;
   onPolygonCreated?: (coordinates: Coordinate[]) => void;
   onEditRiskArea?: (id: string) => void;
   onDeleteRiskArea?: (id: string) => void;
@@ -62,18 +64,23 @@ export function Map(props: MapProps) {
 
   return (
     <MapContainer
-      center={geolocation.location ?? defaultCenter}
-      zoom={geolocation.location ? 15 : 5}
+      center={[
+        geolocation.latitude ?? defaultCenter[0],
+        geolocation.longitude ?? defaultCenter[1],
+      ]}
+      zoom={geolocation.latitude ? 15 : 5}
       minZoom={5}
       maxZoom={25}
       style={{ height: "100vh", width: "100%" }}
       zoomControl={false}
     >
-      <RecenterButton location={geolocation.location}></RecenterButton>
+      {/* <RecenterButton location={geolocation.location}></RecenterButton> */}
       <MapClickHandler onClick={handleMapClick} />
 
-      {geolocation.location && (
-        <FlyToUserLocationOnce location={geolocation.location} />
+      {geolocation.latitude && geolocation.longitude && (
+        <FlyToUserLocationOnce
+          location={[geolocation.latitude, geolocation.longitude]}
+        />
       )}
 
       <TileLayer
@@ -89,6 +96,15 @@ export function Map(props: MapProps) {
           }}
         />
       )}
+
+      {props.showLocationMarker &&
+        geolocation.latitude &&
+        geolocation.longitude && (
+          <PositionMarker
+            position={[geolocation.latitude, geolocation.longitude]}
+            heading={geolocation.heading ?? 0}
+          />
+        )}
 
       {props.riskAreas.map((area) => (
         <Polygon

@@ -17,13 +17,13 @@ export interface RiskAreaFormData {
   coordinates: Coordinate[];
 }
 
-export const Modal: React.FC<ModalProps> = ({
+export function Modal({
   isOpen,
   onClose,
   onSubmit,
   coordinates,
   existingRiskArea,
-}) => {
+}: ModalProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [severity, setSeverity] = useState<SeverityLevel>("medium");
@@ -149,4 +149,4 @@ export const Modal: React.FC<ModalProps> = ({
       </div>
     </div>
   );
-};
+}

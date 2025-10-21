@@ -5,6 +5,7 @@ import type { Coordinate, RiskArea } from "../../types";
 import { useRiskAreaStore } from "../../hooks/useRiskAreaStore";
 import * as api from "../../services/api";
 import styles from "./CommanderView.module.css";
+import { Header } from "../../components/header/Header";
 
 export function CommanderView() {
   const riskAreas = useRiskAreaStore((state) => state.riskAreas);
@@ -38,9 +39,7 @@ export function CommanderView() {
     } catch (error) {
       console.error("Failed to delete risk area:", error);
       alert(
-        error instanceof Error
-          ? error.message
-          : "Failed to delete risk area"
+        error instanceof Error ? error.message : "Failed to delete risk area"
       );
     }
   };
@@ -80,9 +79,7 @@ export function CommanderView() {
 
   return (
     <div className={styles.container}>
-      <header className={styles.header}>
-        <h1 className={styles.title}>Commander View</h1>
-      </header>
+      <Header title="Commander View" />
       <div className={styles.mapWrapper}>
         <Map
           riskAreas={riskAreas}
