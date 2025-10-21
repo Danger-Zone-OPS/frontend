@@ -40,6 +40,7 @@
     gap: 5px;
     padding: unset;
     margin: unset;
+    font-size: inherit;
 }
 
 .pageLink p {

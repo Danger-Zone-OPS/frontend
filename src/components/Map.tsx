@@ -63,8 +63,8 @@ export function Map(props: MapProps) {
   return (
     <MapContainer
       center={geolocation.location ?? defaultCenter}
-      zoom={geolocation.location ? 15 : 10}
-      minZoom={10}
+      zoom={geolocation.location ? 15 : 5}
+      minZoom={5}
       maxZoom={25}
       style={{ height: "100vh", width: "100%" }}
       zoomControl={false}
