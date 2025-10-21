@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Map } from "../../components/Map";
 import type { Coordinate, RiskArea } from "../../types";
 import styles from "./CommanderView.module.css";
+import { Modal } from "../../components/modal/Modal";
 
 const mockRiskAreas: RiskArea[] = [
   {
@@ -35,9 +37,9 @@ const mockRiskAreas: RiskArea[] = [
 
 export function CommanderView() {
   const handlePolygonCreated = (coordinates: Coordinate[]) => {
-    // Maybe open the modal and save the coordinates in some local state
-    console.log(coordinates);
-  };
+    setNewPolygonCoords(coordinates);
+    setIsModalOpen(true);
+};
 
   const handleEditRiskArea = (id: string) => {
     // Maybe open a similar modal with the data where user can edit
@@ -47,11 +49,21 @@ export function CommanderView() {
     // Confirm modal? Then deletion logic
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newPolygonCoords, setNewPolygonCoords] = useState<Coordinate[] | null>(null);
+  
+  
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
         <h1 className={styles.title}>Commander View</h1>
       </header>
+      <Modal 
+        isOpen = {isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
+      
       <div className={styles.mapWrapper}>
         <Map
           riskAreas={mockRiskAreas}
@@ -63,3 +75,4 @@ export function CommanderView() {
     </div>
   );
 }
+

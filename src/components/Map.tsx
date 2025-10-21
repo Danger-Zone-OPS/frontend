@@ -1,3 +1,4 @@
+import "leaflet/dist/leaflet.css";
 import { useEffect, useState } from "react";
 import {
   MapContainer,
@@ -66,8 +67,8 @@ export function Map(props: MapProps) {
       )}
 
       <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
       />
 
       {newAreaPoints.length > 0 && (
@@ -103,14 +104,16 @@ export function Map(props: MapProps) {
               <>
                 <button
                   onClick={() => {
-                    if (props.onEditRiskArea) props.onEditRiskArea(area.id);
+                    if (props.onEditRiskArea && !props.readonly)
+                      props.onEditRiskArea(area.id);
                   }}
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => {
-                    if (props.onDeleteRiskArea) props.onDeleteRiskArea(area.id);
+                    if (props.onDeleteRiskArea && !props.readonly)
+                      props.onDeleteRiskArea(area.id);
                   }}
                 >
                   Delete
