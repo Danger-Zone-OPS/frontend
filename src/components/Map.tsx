@@ -83,7 +83,7 @@ export function Map(props: MapProps) {
         <Polygon
           positions={newAreaPoints}
           pathOptions={{
-            color: "blue",
+            color: "white",
           }}
         />
       )}
