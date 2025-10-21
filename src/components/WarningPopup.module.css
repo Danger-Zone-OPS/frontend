@@ -1,0 +1,133 @@
+.container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 400px;
+}
+
+.warning {
+    display: flex;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 8px;
+    background-color: #222;
+    border: 2px solid;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.warning.low {
+    border-color: yellow;
+    background-color: rgba(255, 255, 0, 0.1);
+}
+
+.warning.medium {
+    border-color: orange;
+    background-color: rgba(255, 165, 0, 0.1);
+}
+
+.warning.high {
+    border-color: red;
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+.warning.critical {
+    border-color: #8B0000;
+    background-color: rgba(139, 0, 0, 0.15);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.warning.proximity {
+    opacity: 0.85;
+    border-style: dashed;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+    50% {
+        box-shadow: 0 4px 20px rgba(139, 0, 0, 0.8);
+    }
+}
+
+.iconWrapper {
+    flex-shrink: 0;
+    display: flex;
+    align-items: flex-start;
+    padding-top: 2px;
+}
+
+.warning.low .iconWrapper {
+    color: yellow;
+}
+
+.warning.medium .iconWrapper {
+    color: orange;
+}
+
+.warning.high .iconWrapper {
+    color: red;
+}
+
+.warning.critical .iconWrapper {
+    color: #ff4444;
+}
+
+.content {
+    flex: 1;
+    min-width: 0;
+}
+
+.title {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.description {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    color: #ccc;
+    line-height: 1.4;
+}
+
+.distance {
+    margin: 0 0 8px 0;
+    font-size: 13px;
+    color: #aaa;
+    font-style: italic;
+}
+
+.severity {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+}
+
+.warning.low .severity {
+    background-color: yellow;
+    color: #000;
+}
+
+.warning.medium .severity {
+    background-color: orange;
+    color: #000;
+}
+
+.warning.high .severity {
+    background-color: red;
+    color: #fff;
+}
+
+.warning.critical .severity {
+    background-color: #8B0000;
+    color: #fff;
+}
