@@ -1,10 +1,8 @@
 import styles from "./ModeSelector.module.css";
 import { Link } from "react-router";
 import { ROUTES } from "../../router";
-import {
-  MdOutlineAdminPanelSettings,
-  MdOutlineNordicWalking,
-} from "react-icons/md";
+import { FaPersonMilitaryRifle } from "react-icons/fa6";
+import { TbMilitaryRank } from "react-icons/tb";
 
 export function ModeSelector() {
   return (
@@ -13,7 +11,7 @@ export function ModeSelector() {
       <div className={styles.pageLinkContainer}>
         <Link className={styles.pageLink} to={ROUTES.Commander}>
           <h3>
-            <MdOutlineAdminPanelSettings />
+            <TbMilitaryRank />
             <span>Commander View</span>
           </h3>
           <p>
@@ -25,7 +23,7 @@ export function ModeSelector() {
         </Link>
         <Link className={styles.pageLink} to={ROUTES.Infantry}>
           <h3>
-            <MdOutlineNordicWalking />
+            <FaPersonMilitaryRifle />
             <span>Infantry View</span>
           </h3>
           <p>
