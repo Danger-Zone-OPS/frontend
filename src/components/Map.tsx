@@ -52,7 +52,10 @@ export function Map(props: MapProps) {
     setNewAreaPoints([]);
   };
 
+  const handleEscapePressed = () => setNewAreaPoints([]);
+
   useHotkeys("enter", handleEnterPressed);
+  useHotkeys("escape", handleEscapePressed);
 
   return (
     <MapContainer
